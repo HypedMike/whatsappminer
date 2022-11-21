@@ -3,7 +3,6 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        System.out.println(args);
         String path = "C:\\Users\\miche\\IdeaProjects\\whatsappminer\\input.txt";
         File test = new File(path);
         if(!test.exists()){
