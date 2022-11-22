@@ -2,7 +2,8 @@ import java.util.Date;
 
 public class Message {
 
-    String date, time, sender, text;
+    String date, t, sender, text, pmam;
+    int hour;
 
     public Message(String data){
         String line[] = data.split(" - ");
@@ -13,7 +14,9 @@ public class Message {
             String info[] = line[0].split(" ");
             if(info.length >= 3){
                 date = info[0].substring(0, info[0].length() - 1);
-                time = info[1] + info[2];
+                t = info[1] + info[2];
+                hour = Integer.parseInt(info[1].split(":")[0]);
+                pmam = info[2];
             }
 
 
@@ -29,12 +32,12 @@ public class Message {
 
     }
     public boolean isNull(){
-        if(date == null || time == null || sender == null || text == null){
+        if(date == null || t == null || sender == null || text == null){
             return true;
         }
         return false;
     }
     public void print(){
-        System.out.println(date + " " + time + " " + sender + ": " + text);
+        System.out.println(date + " " + t + " " + sender + ": " + text);
     }
 }

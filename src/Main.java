@@ -5,13 +5,13 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         String path = "C:\\Users\\miche\\IdeaProjects\\whatsappminer\\input.txt";
         File test = new File(path);
-        if(!test.exists()){
+        if (!test.exists()) {
             System.out.println("Not such file");
             return;
         }
         List<Message> messages = ReadChat(path);
         Chat chat = new Chat(messages);
-        chat.NumberOfMessagesPerUser();
+        chat.print(false, true, true, true);
     }
     private static List<Message> ReadChat(String path) throws FileNotFoundException {
         File input = new File(path);
