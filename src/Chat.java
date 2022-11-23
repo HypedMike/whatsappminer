@@ -1,6 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class Chat {
     public class WordC{
@@ -11,17 +11,20 @@ public class Chat {
     List<WordC> words;
     List<User> users;
     MessageClock message_clock;
-
+    public Chat(String path) throws FileNotFoundException {
+        messages = ReadChat(path);
+        users = new ArrayList<User>();
+        message_clock = new MessageClock(this);
+    }
     public Chat(List<Message> m){
         messages = m;
         users = new ArrayList<User>();
-        message_clock = new MessageClock();
+        message_clock = new MessageClock(this);
     }
-
     public int NumberOfMessages(){
         return messages.size();
     }
-    private List<User> NumberOfMessagesPerUser(){
+    public List<User> NumberOfMessagesPerUser(){
         for(Iterator<Message> iter = messages.iterator(); iter.hasNext();){
             Message m = iter.next();
             message_clock.Add(m.hour, m.pmam);
@@ -44,7 +47,7 @@ public class Chat {
 
         return users;
     }
-    private List<WordC> WordsCounter(){
+    public List<WordC> WordsCounter(){
         words = new ArrayList<>();
         for (Iterator<Message> it = messages.iterator(); it.hasNext();) {
             Message m = it.next();
@@ -92,6 +95,17 @@ public class Chat {
             }
         }
         return array;
+    }
+    private static List<Message> ReadChat(String path) throws FileNotFoundException {
+        File input = new File(path);
+        Scanner scanner = new Scanner(input);
+        List<Message> messages = new ArrayList<Message>();
+        while(scanner.hasNextLine()){
+            Message temp = new Message(scanner.nextLine());
+            if(!temp.isNull())
+                messages.add(temp);
+        }
+        return messages;
     }
     public void print(boolean total_messages, boolean words_counter, boolean number_per_user, boolean messages_per_hour){
         if(total_messages){

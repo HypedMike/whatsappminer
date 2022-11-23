@@ -2,6 +2,7 @@
 
 ### Implementations
 Simple Java program to analyze whatsapp chats and discover interesting things. Current implementations:
+- Total messages number
 - Number of messages by users
 - Top used words
 - Number of messages by hour time
@@ -11,7 +12,6 @@ Future implementations:
 
 ### How to use it
 
-Open your terminal inside the folder path and type\
-`java Main <input file path>` \
-Obviously you will need Java installed on your mcahine
-
+1 - Export from whatsapp a chat \
+2 - From your terminal
+`java -jar .\whatsappminer.jar <chat file path>`
